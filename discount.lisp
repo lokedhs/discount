@@ -1,0 +1,12 @@
+(in-package #:discount)
+
+(defun mkd-line (string)
+  (cffi:with-foreign-string ((foreign-value-string foreign-value-length) string)
+    (cffi:with-foreign-objects ((result '(:pointer :char)))
+      (let ((n (%mkd-line foreign-value-string foreign-value-length result 0)))
+        (when (minusp n)
+          (error "Failed to parse line"))
+        (let* ((string-pointer (cffi:mem-ref result '(:pointer :char)))
+               (s (cffi:foreign-string-to-lisp string-pointer)))
+          (%free string-pointer)
+          s)))))
