@@ -10,3 +10,15 @@
                (s (cffi:foreign-string-to-lisp string-pointer)))
           (%free string-pointer)
           s)))))
+
+;;;
+;;;  The following call ensures that the internal function mkd_initialize() has
+;;   been called at least once in order to ensure that all further calls are
+;;;  reentrant.
+;;;
+
+(defvar *initialised-p* nil)
+
+(unless *initialised-p*
+  (mkd-line "foo")
+  (setq *initialised-p* t))
