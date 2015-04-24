@@ -3,5 +3,6 @@
 (defpackage #:discount
   (:use #:cl)
   (:export
-   #:mkd-line))
+   #:mkd-line
+   #:markdown))
 
