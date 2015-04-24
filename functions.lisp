@@ -1,6 +1,7 @@
 (in-package #:discount)
 
 (cffi:define-foreign-library libmarkdown
+  (:darwin "libmarkdown.dylib")
   (:unix "libmarkdown.so"))
 
 (cffi:use-foreign-library libmarkdown)
